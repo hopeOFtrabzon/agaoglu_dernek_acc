@@ -28,7 +28,7 @@ const ExpenseForm = () => {
     mutationFn: (payload) => api.post("/expenses/", payload),
     onSuccess: () => {
       toast({
-        title: "Expense recorded",
+        title: "Gider kaydedildi",
         status: "success",
         duration: 3000,
         isClosable: true
@@ -38,7 +38,7 @@ const ExpenseForm = () => {
       queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
-      toast({ title: "Unable to save expense", status: "error" });
+      toast({ title: "Gider kaydedilemedi", status: "error" });
     }
   });
 
@@ -59,27 +59,27 @@ const ExpenseForm = () => {
   return (
     <Box as="form" onSubmit={handleSubmit} bg="white" p={6} borderRadius="lg" boxShadow="sm">
       <Heading size="md" mb={4}>
-        Add Expense
+        Gider Ekle
       </Heading>
       <Stack spacing={4}>
         <FormControl isRequired>
-          <FormLabel>Description</FormLabel>
-          <Textarea name="description" value={formData.description} onChange={handleChange} placeholder="Team offsite catering" />
+          <FormLabel>Açıklama</FormLabel>
+          <Textarea name="description" value={formData.description} onChange={handleChange} placeholder="Ekip yemeği" />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Amount</FormLabel>
+          <FormLabel>Tutar</FormLabel>
           <Input type="number" step="0.01" name="amount" value={formData.amount} onChange={handleChange} placeholder="250.00" />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Category</FormLabel>
-          <Input name="category" value={formData.category} onChange={handleChange} placeholder="Food" />
+          <FormLabel>Kategori</FormLabel>
+          <Input name="category" value={formData.category} onChange={handleChange} placeholder="Yemek" />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Date</FormLabel>
+          <FormLabel>Tarih</FormLabel>
           <Input type="date" name="date" value={formData.date} onChange={handleChange} />
         </FormControl>
         <Button type="submit" colorScheme="red" isLoading={mutation.isPending}>
-          Save Expense
+          Gideri Kaydet
         </Button>
       </Stack>
     </Box>

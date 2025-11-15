@@ -1,7 +1,8 @@
-import { Avatar, Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { LogOut } from "lucide-react";
 
 import { useAuth } from "../providers/AuthProvider";
+import logo from "../assets/agaoglu-logo.png";
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -17,12 +18,15 @@ const Header = () => {
       justify="space-between"
       gap={4}
     >
-      <Box>
+      <Flex align="center" gap={4}>
+        <Image src={logo} alt="Ağaoğlu Dernek Logosu" maxH="64px" objectFit="contain" />
         <Heading as="h1" size="lg" mb={1} color="blue.700">
-          Accounting System
+          Muhasebe Sistemi
         </Heading>
-        <Text color="gray.600">Monitor every transaction in one place.</Text>
-      </Box>
+      </Flex>
+      <Text color="gray.600" mt={{ base: 3, md: 0 }}>
+        Tüm işlemleri tek yerden takip edin.
+      </Text>
       <Flex align="center" gap={4}>
         <Avatar name={user?.username} size="md" />
         <Box>
@@ -37,7 +41,7 @@ const Header = () => {
           variant="outline"
           onClick={logout}
         >
-          Logout
+          Çıkış Yap
         </Button>
       </Flex>
     </Flex>

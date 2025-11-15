@@ -21,7 +21,7 @@ const SummaryCards = () => {
     <Flex direction="column" gap={4} mt={8}>
       <Flex align="center" justify="space-between">
         <Text fontSize="lg" fontWeight="medium" color="gray.600">
-          Financial Snapshot
+          Finansal Özet
         </Text>
         <Button
           size="sm"
@@ -31,28 +31,28 @@ const SummaryCards = () => {
           colorScheme="blue"
           isDisabled={isLoading}
         >
-          Refresh
+          Yenile
         </Button>
       </Flex>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
         <SummaryStat
-          label="Expenses"
+          label="Giderler"
           value={totals.total_expenses}
-          help="Total spent"
+          help="Toplam harcama"
           color="red.500"
           isLoading={isLoading}
         />
         <SummaryStat
-          label="Profits"
+          label="Gelirler"
           value={totals.total_profits}
-          help="Total earned"
+          help="Toplam kazanç"
           color="green.500"
           isLoading={isLoading}
         />
         <SummaryStat
-          label="Net Balance"
+          label="Net Bakiye"
           value={totals.net}
-          help={totals.net >= 0 ? "In the green" : "In the red"}
+          help={totals.net >= 0 ? "Bakiye pozitif" : "Bakiye negatif"}
           color={totals.net >= 0 ? "green.500" : "red.500"}
           isLoading={isLoading}
         />
@@ -65,7 +65,7 @@ const SummaryStat = ({ label, value, help, color, isLoading }) => (
   <Stat bg="white" borderRadius="lg" p={6} boxShadow="sm">
     <StatLabel color="gray.500">{label}</StatLabel>
     <StatNumber color={color}>
-      {isLoading ? "--" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value)}
+      {isLoading ? "--" : new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY" }).format(value)}
     </StatNumber>
     <StatHelpText>{help}</StatHelpText>
   </Stat>
