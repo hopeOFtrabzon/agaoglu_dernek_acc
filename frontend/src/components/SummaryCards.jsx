@@ -1,4 +1,4 @@
-import { Button, Flex, SimpleGrid, Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/react";
+import { Button, Flex, SimpleGrid, Stat, StatHelpText, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import { Loader2, RefreshCw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -20,9 +20,9 @@ const SummaryCards = () => {
   return (
     <Flex direction="column" gap={4} mt={8}>
       <Flex align="center" justify="space-between">
-        <StatLabel fontSize="lg" color="gray.600">
+        <Text fontSize="lg" fontWeight="medium" color="gray.600">
           Financial Snapshot
-        </StatLabel>
+        </Text>
         <Button
           size="sm"
           leftIcon={isFetching ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}

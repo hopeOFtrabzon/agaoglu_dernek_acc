@@ -60,6 +60,26 @@ python create_test_user.py
 ```
 This script creates tables (if needed) and inserts `testuser@example.com / testpass123` only when absent.
 
+## Backend2 (NestJS + Prisma)
+A NestJS + Prisma rewrite lives in `backend2/`. It targets the same PostgreSQL schema and mirrors the original FastAPI endpoints so the existing frontend can switch over without code changes.
+
+```bash
+cd backend2
+cp .env.example .env   # update DATABASE_URL, JWT_SECRET, token lifetime, bcrypt rounds
+npm install
+npm run prisma:migrate   # or `npm run prisma:deploy` in CI
+npm run prisma:seed      # optional helper to recreate the demo user
+npm run start:dev        # launches on http://localhost:3000 by default
+```
+
+Key modules:
+- `auth` exposes `POST /auth/register`, `POST /auth/jwt/login`, `POST /auth/jwt/logout` returning FastAPI-compatible payloads.
+- `users` keeps `GET /users/me` + `PATCH /users/:id` (owner/superuser only).
+- `expenses` and `profits` provide the CRUD + filtering endpoints used by the React widgets.
+- `summary` aggregates totals and returns `{ total_expenses, total_profits, net }`.
+
+`npm run prisma:seed` seeds `testuser@example.com / testpass123` using the values from `.env`.
+
 ## Frontend setup
 ```bash
 cd frontend
