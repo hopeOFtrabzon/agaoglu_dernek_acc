@@ -1,0 +1,12 @@
+alembic
+asyncpg
+email-validator
+fastapi>=0.109
+fastapi-users[sqlalchemy,oauth]
+passlib[bcrypt]
+psycopg2-binary
+python-dotenv
+python-jose[cryptography]
+python-multipart
+sqlmodel
+uvicorn
