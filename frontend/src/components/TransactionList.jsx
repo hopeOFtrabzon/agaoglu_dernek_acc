@@ -38,7 +38,7 @@ const TransactionList = ({ type }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions", type] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
-      toast({ title: "Kayıt silindi", status: "info" });
+      toast({ title: "Record deleted", status: "info" });
     }
   });
 
@@ -49,9 +49,9 @@ const TransactionList = ({ type }) => {
   return (
     <Box bg="white" p={6} borderRadius="lg" boxShadow="sm">
       <Flex justify="space-between" align="center" mb={4} gap={3} flexWrap="wrap">
-        <Heading size="md">{type === "expenses" ? "Son Giderler" : "Son Gelirler"}</Heading>
+        <Heading size="md">{type === "expenses" ? "Recent Expenses" : "Recent Profits"}</Heading>
         <Input
-          placeholder="Açıklamaya göre filtrele"
+          placeholder="Filter by description"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           maxW={{ base: "full", md: "250px" }}
@@ -64,7 +64,7 @@ const TransactionList = ({ type }) => {
       ) : (
         <Stack spacing={4} maxH="480px" overflowY="auto">
           {items.length === 0 && (
-            <Text color="gray.500">Henüz kayıt yok.</Text>
+            <Text color="gray.500">No records yet.</Text>
           )}
           {items.map((item) => (
             <Flex
@@ -78,16 +78,16 @@ const TransactionList = ({ type }) => {
               <Box>
                 <Text fontWeight="semibold">{item.description}</Text>
                 <Text fontSize="sm" color="gray.500">
-                  {new Date(item.date).toLocaleDateString("tr-TR")} • {item[hintKey]}
+                  {new Date(item.date).toLocaleDateString("en-US")} • {item[hintKey]}
                 </Text>
               </Box>
               <Flex gap={3} align="center">
                 <Text fontWeight="bold" color={type === "expenses" ? "red.500" : "green.500"}>
-                  {new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY" }).format(item.amount)}
+                  {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.amount)}
                 </Text>
                 <IconButton
                   icon={<Trash2 size={16} />}
-                  aria-label="sil"
+                  aria-label="delete"
                   colorScheme="red"
                   variant="ghost"
                   isLoading={mutation.isPending}

@@ -27,13 +27,13 @@ const ProfitForm = () => {
   const mutation = useMutation({
     mutationFn: (payload) => api.post("/profits/", payload),
     onSuccess: () => {
-      toast({ title: "Gelir kaydedildi", status: "success", duration: 3000, isClosable: true });
+      toast({ title: "Profit recorded", status: "success", duration: 3000, isClosable: true });
       setFormData({ description: "", amount: "", source: "", date: "" });
       queryClient.invalidateQueries({ queryKey: ["transactions", "profits"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
-      toast({ title: "Gelir kaydedilemedi", status: "error" });
+      toast({ title: "Unable to save profit", status: "error" });
     }
   });
 
@@ -51,27 +51,27 @@ const ProfitForm = () => {
   return (
     <Box as="form" onSubmit={handleSubmit} bg="white" p={6} borderRadius="lg" boxShadow="sm">
       <Heading size="md" mb={4}>
-        Gelir Ekle
+        Add Profit
       </Heading>
       <Stack spacing={4}>
         <FormControl isRequired>
-          <FormLabel>Açıklama</FormLabel>
-          <Textarea name="description" value={formData.description} onChange={handleChange} placeholder="Danışmanlık projesi" />
+          <FormLabel>Description</FormLabel>
+          <Textarea name="description" value={formData.description} onChange={handleChange} placeholder="Consulting project" />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Tutar</FormLabel>
+          <FormLabel>Amount</FormLabel>
           <Input type="number" step="0.01" name="amount" value={formData.amount} onChange={handleChange} placeholder="750.00" />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Kaynak</FormLabel>
-          <Input name="source" value={formData.source} onChange={handleChange} placeholder="Müşteri A" />
+          <FormLabel>Source</FormLabel>
+          <Input name="source" value={formData.source} onChange={handleChange} placeholder="Client A" />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Tarih</FormLabel>
+          <FormLabel>Date</FormLabel>
           <Input type="date" name="date" value={formData.date} onChange={handleChange} />
         </FormControl>
         <Button type="submit" colorScheme="green" isLoading={mutation.isPending}>
-          Geliri Kaydet
+          Save Profit
         </Button>
       </Stack>
     </Box>

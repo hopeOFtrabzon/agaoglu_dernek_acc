@@ -50,11 +50,11 @@ const LoginView = () => {
           last_name: formData.last_name || null
         });
         await login({ email: formData.email, password: formData.password });
-        toast({ title: "Hesap oluşturuldu", status: "success" });
+        toast({ title: "Account created", status: "success" });
       }
     } catch (error) {
       toast({
-        title: "Kimlik doğrulama başarısız",
+        title: "Authentication failed",
         description: error.response?.data?.detail || error.message,
         status: "error"
       });
@@ -65,45 +65,45 @@ const LoginView = () => {
     <Flex align="center" justify="center" minH="70vh">
       <Box bg="white" p={10} borderRadius="xl" boxShadow="lg" w="full" maxW="480px">
         <Heading mb={6} textAlign="center">
-          {mode === "login" ? "Tekrar hoş geldiniz" : "Hesap oluşturun"}
+          {mode === "login" ? "Welcome back" : "Create an account"}
         </Heading>
         <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
             {mode === "register" && (
               <>
                 <FormControl isRequired>
-                  <FormLabel>Kullanıcı adı</FormLabel>
-                  <Input name="username" value={formData.username} onChange={handleChange} placeholder="acme-finans" />
+                  <FormLabel>Username</FormLabel>
+                  <Input name="username" value={formData.username} onChange={handleChange} placeholder="acme-finance" />
                 </FormControl>
                 <Flex gap={4} flexWrap="wrap">
                   <FormControl flex="1 1 45%">
-                    <FormLabel>Ad</FormLabel>
+                    <FormLabel>First name</FormLabel>
                     <Input name="first_name" value={formData.first_name} onChange={handleChange} placeholder="Ada" />
                   </FormControl>
                   <FormControl flex="1 1 45%">
-                    <FormLabel>Soyad</FormLabel>
+                    <FormLabel>Last name</FormLabel>
                     <Input name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Lovelace" />
                   </FormControl>
                 </Flex>
               </>
             )}
             <FormControl isRequired>
-              <FormLabel>E-posta</FormLabel>
-              <Input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="siz@sirket.com" />
+              <FormLabel>Email</FormLabel>
+              <Input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="you@company.com" />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Şifre</FormLabel>
+              <FormLabel>Password</FormLabel>
               <Input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="********" />
             </FormControl>
             <Button type="submit" colorScheme="blue" isLoading={loading}>
-              {mode === "login" ? "Giriş Yap" : "Kaydol"}
+              {mode === "login" ? "Login" : "Register"}
             </Button>
           </Stack>
         </form>
         <Text mt={4} textAlign="center" color="gray.600">
-          {mode === "login" ? "Hesabınız yok mu?" : "Zaten üye misiniz?"}{" "}
+          {mode === "login" ? "Need an account?" : "Already registered?"}{" "}
           <Link color="blue.500" onClick={toggleMode} fontWeight="semibold">
-            {mode === "login" ? "Hemen oluşturun" : "Giriş yapın"}
+            {mode === "login" ? "Create one" : "Sign in"}
           </Link>
         </Text>
       </Box>

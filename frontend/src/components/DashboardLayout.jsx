@@ -22,8 +22,8 @@ const DashboardLayout = () => {
         colorScheme="blue"
       >
         <TabList>
-          <Tab fontWeight="semibold">Giderler</Tab>
-          <Tab fontWeight="semibold">Gelirler</Tab>
+          <Tab fontWeight="semibold">Expenses</Tab>
+          <Tab fontWeight="semibold">Profits</Tab>
         </TabList>
         <TabPanels>
           <TabPanel px={0} pt={6}>

@@ -23,17 +23,17 @@ const Header = () => {
       const link = document.createElement("a");
       link.href = url;
       const date = new Date().toISOString().split("T")[0];
-      link.setAttribute("download", `gelir-gider-raporu-${date}.xlsx`);
+      link.setAttribute("download", `income-expense-report-${date}.xlsx`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      toast({ title: "Excel indirildi", status: "success" });
+      toast({ title: "Excel exported", status: "success" });
     } catch (error) {
       toast({
-        title: "Excel indirilemedi",
-        description: error.response?.data?.message ?? "Lütfen tekrar deneyin.",
+        title: "Unable to export",
+        description: error.response?.data?.message ?? "Please try again.",
         status: "error"
       });
     } finally {
@@ -53,13 +53,13 @@ const Header = () => {
       gap={4}
     >
       <Flex align="center" gap={4}>
-        <Image src={logo} alt="Ağaoğlu Dernek Logosu" maxH="64px" objectFit="contain" />
+        <Image src={logo} alt="Agaoglu Association Logo" maxH="64px" objectFit="contain" />
         <Heading as="h1" size="lg" mb={1} color="blue.700">
-          Muhasebe Sistemi
+          Accounting System
         </Heading>
       </Flex>
       <Text color="gray.600" mt={{ base: 3, md: 0 }}>
-        İşlerinizi tek noktadan takip edin.
+        Track every transaction in one place.
       </Text>
       <Flex align="center" gap={4} flexWrap="wrap" justify="flex-end">
         <Avatar name={user?.username} size="md" />
@@ -76,7 +76,7 @@ const Header = () => {
           onClick={handleExport}
           isLoading={isExporting}
         >
-          Excel'e Aktar
+          Export Excel
         </Button>
         <Button
           leftIcon={<LogOut size={16} />}
@@ -84,7 +84,7 @@ const Header = () => {
           variant="outline"
           onClick={logout}
         >
-          Çıkış Yap
+          Logout
         </Button>
       </Flex>
     </Flex>
